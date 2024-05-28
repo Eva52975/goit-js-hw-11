@@ -13,5 +13,10 @@ export function findImage(inputValue) {
 
   const headers = {};
 
-  return fetch(url, { headers }).then(res => res.json());
+  return fetch(url, { headers }).then(res => {
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+    return res.json();
+  });
 }
